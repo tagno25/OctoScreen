@@ -247,6 +247,17 @@ func (m *printStatusPanel) doUpdateState(s *octoprint.PrinterState) {
 	m.pause.SetImage(MustImageFromFile("pause.svg"))
 }
 
+func truncateString(str string, num int) string {
+	bnoden := str
+	if len(str) > num {
+		if num > 3 {
+			num -= 3
+		}
+		bnoden = str[0:num] + "..."
+	}
+	return bnoden
+}
+
 func (m *printStatusPanel) updateJob() {
 
 	s, err := (&octoprint.JobRequest{}).Do(m.UI.Printer)
@@ -259,7 +270,9 @@ func (m *printStatusPanel) updateJob() {
 	if s.Job.File.Name != "" {
 		file = s.Job.File.Name
 		file = strings.Replace(file, ".gcode", "", -1)
-		file = strEllipsisLen(file, 35)
+		//file = strEllipsisLen(file, 35)
+		file= truncateString(file,20) 
+		//strEllipsisLen does not appear to have a max length, allow overflow of screen box
 	}
 
 	m.file.Label.SetLabel(file)

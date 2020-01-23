@@ -97,7 +97,7 @@ func (m *nozzleCalibrationPanel) createAutoZCalibrationButton() gtk.IWidget {
 }
 
 func (m *nozzleCalibrationPanel) createIncreaseOffsetButton() gtk.IWidget {
-	return MustButtonImage("Bed Down", "z-offset-increase.svg", func() {
+	return MustButtonImage("+ Z Offset", "z-offset-increase.svg", func() {
 		if !m.zCalibrationMode {
 			return
 		}
@@ -106,7 +106,7 @@ func (m *nozzleCalibrationPanel) createIncreaseOffsetButton() gtk.IWidget {
 }
 
 func (m *nozzleCalibrationPanel) createDecreaseOffsetButton() gtk.IWidget {
-	return MustButtonImage("Bed Up", "z-offset-decrease.svg", func() {
+	return MustButtonImage("- Z Offset", "z-offset-decrease.svg", func() {
 		if !m.zCalibrationMode {
 			return
 		}

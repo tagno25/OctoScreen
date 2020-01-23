@@ -141,7 +141,7 @@ func (m *filamentPanel) createLoadButton() gtk.IWidget {
 
 	return MustButtonImage("Load", "extrude.svg", func() {
 		cmd := &octoprint.CommandRequest{}
-		cmd.Commands = []string{"M701}
+		cmd.Commands = []string{"M701"}
 
 		Logger.Info("Sending filament load request")
 		if err := cmd.Do(m.UI.Printer); err != nil {

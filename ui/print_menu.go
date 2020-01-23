@@ -23,6 +23,7 @@ func (m *printMenuPanel) initialize() {
 	m.Grid().Attach(MustButtonImageStyle("Network", "network.svg", "color1", m.showNetwork), 3, 0, 1, 1)
 	m.Grid().Attach(MustButtonImageStyle("System", "info.svg", "color3", m.showSystem), 4, 0, 1, 1)
 	m.Grid().Attach(MustButtonImageStyle("Filament", "filament.svg", "color3", m.showFilament), 1, 1, 1, 1)
+	m.Grid().Attach(MustButtonImageStyle("Control", "control.svg", "color3", m.showControl), 2, 1, 1, 1)
 }
 
 func (m *printMenuPanel) showTemperature() {
@@ -45,6 +46,6 @@ func (m *printMenuPanel) showFilament() {
 	m.UI.Add(FilamentPanel(m.UI, m))
 }
 
-// func (m *printMenuPanel) showControl() {
-// 	m.UI.Add(ControlPanel(m.UI, m))
-// }
+func (m *printMenuPanel) showControl() {
+ 	m.UI.Add(ControlPanel(m.UI, m))
+}

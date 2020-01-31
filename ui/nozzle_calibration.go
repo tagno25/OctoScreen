@@ -22,6 +22,7 @@ type nozzleCalibrationPanel struct {
 	cPoint           pointCoordinates
 	zOffset          float64
 	labZOffsetLabel  *gtk.Label
+	step             *StepButton
 }
 
 func NozzleCalibrationPanel(ui *UI, parent Panel) Panel {
@@ -85,7 +86,7 @@ func (m *nozzleCalibrationPanel) createAutoZCalibrationButton() gtk.IWidget {
 
 func (m *nozzleCalibrationPanel) createIncreaseOffsetButton() gtk.IWidget {
 	return MustButtonImage("+ value", "z-offset-increase.svg", func() {
-		distance := m.step.Value().(float64)
+		distance := m.step.Value().(string)
 		m.testZ(distance)
 	})
 }
@@ -104,8 +105,8 @@ func (m *nozzleCalibrationPanel) createIncreaseOffsetHalfButton() gtk.IWidget {
 
 func (m *nozzleCalibrationPanel) createDecreaseOffsetButton() gtk.IWidget {
 	return MustButtonImage("- value", "z-offset-decrease.svg", func() {
-		distance := m.step.Value().(float64) * -1.0
-		m.testZ(distance)
+		distance := m.step.Value().(float64)
+		m.testZ(fmt.Sprintf("-%d", distance))
 	})
 }
 
@@ -122,7 +123,7 @@ func (m *nozzleCalibrationPanel) createDecreaseOffsetHalfButton() gtk.IWidget {
 }
 
 func (m *nozzleCalibrationPanel) createAcceptButton() gtk.IWidget {
-	return MustButtonImage("Accept", "complete.svg", func() 
+	return MustButtonImage("Accept", "complete.svg", func() {
 		cmd := &octoprint.CommandRequest{}
 		cmd.Commands = []string{
 			"ACCEPT",
@@ -137,7 +138,7 @@ func (m *nozzleCalibrationPanel) createAcceptButton() gtk.IWidget {
 }
 
 func (m *nozzleCalibrationPanel) createAbortButton() gtk.IWidget {
-	return MustButtonImage("Abort", "stop.svg", func() 
+	return MustButtonImage("Abort", "stop.svg", func() {
 		cmd := &octoprint.CommandRequest{}
 		cmd.Commands = []string{
 			"ABORT",

@@ -146,7 +146,7 @@ func (m *filamentPanel) createLoadButton() gtk.IWidget {
 			cmd.Commands = []string{
 				m.UI.Settings.GCodes.ChangeFilament,
 			}
-		else {
+		} else {
 			cmd.Commands = []string{"M701"}
 		}
 
@@ -167,7 +167,7 @@ func (m *filamentPanel) createUnloadButton() gtk.IWidget {
 			cmd.Commands = []string{
 				m.UI.Settings.GCodes.ChangeFilament,
 			}
-		else {
+		} else {
 			cmd.Commands = []string{"M702"}
 		}
 

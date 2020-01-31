@@ -114,16 +114,16 @@ type GetSettingsResponse struct {
 	ZAxisInverted     bool       `json:"z_axis_inverted"`
 	MenuStructure     []MenuItem `json:"menu_structure"`
 	GCodes            struct {
-		AutoBedLevel string `json:"auto_bed_level"`,
-		Pause string `json:"pause"`,
-		Resume string `json:"resume"`,
-		Stop string `json:"stop"`,
-		ProbeCalibrate string `json:"probe_calibrate"`,
-		ChangeFilament string `json:"change_filament"`,
-		LoadFilament string `json:"load_filament"`,
-		KlipperRestart string `json:"klipper_restart"`,
-		KlipperFirmwareRestart string `json:"klipper_firmware_restart"`,
-		KlipperSaveConfig string `json:"klipper_save_config"`
+		AutoBedLevel           string `json:"auto_bed_level"`
+		Pause                  string `json:"pause"`
+		Resume                 string `json:"resume"`
+		Stop                   string `json:"stop"`
+		ProbeCalibrate         string `json:"probe_calibrate"`
+		ChangeFilament         string `json:"change_filament"`
+		LoadFilament           string `json:"load_filament"`
+		KlipperRestart         string `json:"klipper_restart"`
+		KlipperFirmwareRestart string `json:"klipper_firmware_restart"`
+		KlipperSaveConfig      string `json:"klipper_save_config"`
 	} `json:"gcodes"`
 }
 

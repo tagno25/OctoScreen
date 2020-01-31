@@ -1,4 +1,4 @@
-# OctoScreen [![GitHub release](https://img.shields.io/github/release/Z-Bolt/OctoScreen.svg)](https://github.com/Z-Bolt/OctoScreen/releases) [![license](https://img.shields.io/github/license/Z-Bolt/OctoScreen.svg)]()
+# OctoScreen [![GitHub release](https://img.shields.io/github/release/boardthatpowder/OctoScreen.svg)](https://github.com/boardthatpowder/OctoScreen/releases) [![license](https://img.shields.io/github/license/boardthatpowder/OctoScreen.svg)]()
 
 _OctoScreen_, LCD touch interface for our Octoprint based on GTK+3, that allows you to control your 3D Printer, like you can do with any [LCD panel](http://reprap.org/wiki/RepRapTouch), but using _OctoPrint_ and a Raspberry Pi. It's a _X application_ to be executed directly in the X Server without any windows
 manager or browser, as _frontend of a [OctoPrint](http://octoprint.org) server_ in a Raspberry Pi
@@ -36,7 +36,7 @@ resources.
 This is the main reason because I develop this X application to be executed
 in my 3d printer.
 
-## [Roadmap](https://github.com/Z-Bolt/OctoScreen/projects/2)
+## [Roadmap](https://github.com/boardthatpowder/OctoScreen/projects/2)
 
 Installation
 ------------
@@ -61,12 +61,12 @@ Also you may need to install video drive, usually **no screens found** error ind
 ### Install from .deb package
 
 The recommended way to install *OctoScreen* is use the `.deb` packages
-from the [Releases](https://github.com/Z-Bolt/OctoScreen/releases) page. The packages
+from the [Releases](https://github.com/boardthatpowder/OctoScreen/releases) page. The packages
 are available for Debian Stretch based distributions such as Raspbian and OctoPi.
 
 For example for a Raspbian Stretch:
 ```sh
-wget https://github.com/Z-Bolt/OctoScreen/releases/download/v2.5.1/octoscreen_2.5-1_armhf.deb
+wget https://github.com/boardthatpowder/OctoScreen/releases/download/v2.5.1/octoscreen_2.5-1_armhf.deb
 sudo dpkg -i octoscreen_2.5-1_armhf.deb
 ```
 
@@ -116,7 +116,7 @@ the `.deb` package you can configure it at `/etc/octoscreen/config`.
 
 - `OCTOSCREEN_RESOLUTION` -  Resolution of the application, should be configured to the resolution of your screen. Optimal resolution for OctoScreen is no less than 800x480, so if the physical resolution of your screen is 480x320, it's recommended to set the software resolution 800x533. If you are using Raspbian you can do it by changing [`hdmi_cvt`](https://www.raspberrypi.org/documentation/configuration/config-txt/video.md) param in `/boot/config.txt` file.
 
-### [Menu Configuration](https://github.com/Z-Bolt/OctoScreen/blob/master/docs/README.md)
+### [Menu Configuration](https://github.com/boardthatpowder/OctoScreen/blob/master/docs/README.md)
 
 ### Custom controls and commands
 

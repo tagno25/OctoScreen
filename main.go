@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Z-Bolt/OctoScreen/ui"
+	"github.com/boardthatpowder/OctoScreen/ui"
 	"github.com/gotk3/gotk3/gtk"
 	"gopkg.in/yaml.v1"
 )

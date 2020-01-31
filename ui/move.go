@@ -1,8 +1,8 @@
 package ui
 
 import (
-	"github.com/gotk3/gotk3/gtk"
 	"github.com/mcuadros/go-octoprint"
+	"github.com/gotk3/gotk3/gtk"
 )
 
 var movePanelInstance *movePanel

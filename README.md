@@ -15,6 +15,13 @@ equipped with any [Touch Screen](https://www.waveshare.com/wiki/4.3inch_HDMI_LCD
 - Wifi connection management
 - Toolchanger management tools
 
+### boardthatpowder fork differences:
+
+- More Klipper firmware friendly
+- Klipper probe calibration for bed levelling
+- Added additional controls to actions menu
+- Note: this must be used with the corresponding boardthatpowder fork of [OctoPrint-Z-Bolt-OctoScreen](https://github.com/boardthatpowder/OctoPrint-Z-Bolt-OctoScreen) OctoPrint plugin
+
 ### How this is different from TouchUI?
 
 [TouchUI](http://plugins.octoprint.org/plugins/touchui/), is an amazing plugin

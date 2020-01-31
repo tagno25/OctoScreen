@@ -51,7 +51,7 @@ func (m *filamentPanel) initialize() {
 
 	m.Grid().Attach(m.box, 2, 0, 2, 2)
 
-	m.amount = MustStepButton("move-step.svg", Step{"1mm", 1}, Step{"5mm", 5}, Step{"10mm", 10})
+	m.amount = MustStepButton("move-step.svg", Step{"1mm", 1}, Step{"5mm", 5}, Step{"10mm", 10}, Step{"25mm", 25}, Step{"50mm", 50})
 	m.Grid().Attach(m.amount, 2, 2, 1, 1)
 
 	m.Grid().Attach(m.createToolButton(), 1, 2, 1, 1)
@@ -141,7 +141,14 @@ func (m *filamentPanel) createLoadButton() gtk.IWidget {
 
 	return MustButtonImage("Load", "extrude.svg", func() {
 		cmd := &octoprint.CommandRequest{}
-		cmd.Commands = []string{"M701"}
+
+		if m.UI.Settings != nil && m.UI.Settings.GCodes.LoadFilament != "" {
+			cmd.Commands = []string{
+				m.UI.Settings.GCodes.ChangeFilament,
+			}
+		else {
+			cmd.Commands = []string{"M701"}
+		}
 
 		Logger.Info("Sending filament load request")
 		if err := cmd.Do(m.UI.Printer); err != nil {
@@ -155,7 +162,14 @@ func (m *filamentPanel) createUnloadButton() gtk.IWidget {
 
 	return MustButtonImage("Unload", "retract.svg", func() {
 		cmd := &octoprint.CommandRequest{}
-		cmd.Commands = []string{"M702"}
+
+		if m.UI.Settings != nil && m.UI.Settings.GCodes.ChangeFilament != "" {
+			cmd.Commands = []string{
+				m.UI.Settings.GCodes.ChangeFilament,
+			}
+		else {
+			cmd.Commands = []string{"M702"}
+		}
 
 		Logger.Info("Sending filament unload request")
 		if err := cmd.Do(m.UI.Printer); err != nil {

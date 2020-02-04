@@ -51,7 +51,7 @@ func (m *filamentPanel) initialize() {
 
 	m.Grid().Attach(m.box, 2, 0, 2, 2)
 
-	m.amount = MustStepButton("move-step.svg", Step{"1mm", 1}, Step{"5mm", 5}, Step{"10mm", 10})
+	m.amount = MustStepButton("move-step.svg", Step{"1mm", 1}, Step{"5mm", 5}, Step{"10mm", 10}, Step{"25mm", 25})
 	m.Grid().Attach(m.amount, 2, 2, 1, 1)
 
 	m.Grid().Attach(m.createToolButton(), 1, 2, 1, 1)

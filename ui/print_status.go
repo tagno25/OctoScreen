@@ -271,7 +271,7 @@ func (m *printStatusPanel) updateJob() {
 		file = s.Job.File.Name
 		file = strings.Replace(file, ".gcode", "", -1)
 		//file = strEllipsisLen(file, 35)
-		file= truncateString(file,20) 
+		file = truncateString(file, 26) 
 		//strEllipsisLen does not appear to have a max length, allow overflow of screen box
 	}
 

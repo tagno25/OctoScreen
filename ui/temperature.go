@@ -51,7 +51,7 @@ func (m *temperaturePanel) initialize() {
 	m.Grid().Attach(m.box, 2, 1, 2, 1)
 
 	m.Grid().Attach(m.createToolButton(), 1, 1, 1, 1)
-	m.amount = MustStepButton("move-step.svg", Step{"10°C", 10.}, Step{"5°C", 5.}, Step{"1°C", 1.})
+	m.amount = MustStepButton("move-step.svg", Step{"50°C", 50.}, Step{"10°C", 10.}, Step{"5°C", 5.}, Step{"1°C", 1.})
 	m.Grid().Attach(m.amount, 2, 0, 1, 1)
 
 	m.Grid().Attach(MustButtonImage("More", "heat-up.svg", m.profilePanel), 3, 0, 1, 1)
@@ -200,6 +200,24 @@ func (m *profilesPanel) loadProfiles() {
 
 	for _, profile := range s.Temperature.Profiles {
 		m.AddButton(m.createProfileButton("heat-up.svg", profile))
+
+		m.AddButton(m.createProfileButton("heat-up.svg", &octoprint.TemperatureProfile{
+			Name:     profile.Name + " (bed)",
+			Bed:      profile.Bed,
+			Extruder: 0,
+		}))
+
+		m.AddButton(m.createProfileButton("heat-up.svg", &octoprint.TemperatureProfile{
+			Name:     profile.Name + " (extruder)",
+			Bed:      0,
+			Extruder: profile.Extruder,
+		}))
+
+		m.AddButton(m.createProfileButton("heat-up.svg", &octoprint.TemperatureProfile{
+			Name:     profile.Name + " (all)",
+			Bed:      profile.Bed,
+			Extruder: profile.Extruder,
+		}))
 	}
 
 	m.AddButton(m.createProfileButton("cool-down.svg", &octoprint.TemperatureProfile{

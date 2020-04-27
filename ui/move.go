@@ -1,8 +1,8 @@
 package ui
 
 import (
-	"github.com/gotk3/gotk3/gtk"
 	"github.com/mcuadros/go-octoprint"
+	"github.com/gotk3/gotk3/gtk"
 )
 
 var movePanelInstance *movePanel
@@ -39,7 +39,7 @@ func (m *movePanel) initialize() {
 	}
 
 	m.step = MustStepButton("move-step.svg",
-		Step{"100mm", 100.0}, Step{"10mm", 10.0}, Step{"1mm", 1.0}, Step{"0.1mm", 0.1}, Step{"0.02mm", 0.02},
+		Step{"100mm", 100.0}, Step{"50mm", 50.0}, Step{"10mm", 10.0}, Step{"1mm", 1.0}, Step{"0.1mm", 0.1}, Step{"0.02mm", 0.02},
 	)
 
 	m.Grid().Attach(m.step, 3, 2, 1, 1)

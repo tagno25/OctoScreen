@@ -9,10 +9,10 @@ Build-Depends: debhelper (>= 9),
                libcairo2-dev (>= 1.14.0),
                libgtk-3-dev (>= 3.14)
 Standards-Version: 4.1.1
-Homepage: https://github.com/Z-Bolt/OctoScreen
+Homepage: https://github.com/boardthatpowder/OctoScreen
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-go/packages/octoscreen.git
 Vcs-Git: https://anonscm.debian.org/git/pkg-go/packages/octoscreen.git
-XS-Go-Import-Path: github.com/Z-Bolt/OctoScreen
+XS-Go-Import-Path: github.com/boardthatpowder/OctoScreen
 Testsuite: autopkgtest-pkg-go
 
 Package: octoscreen

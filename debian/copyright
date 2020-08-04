@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: OctoScreen
-Source: https://github.com/boardthatpowder/OctoScreen
+Source: https://github.com/Hypertoken/OctoScreen
 
 Files: *
 Copyright: 2017 Máximo Cuadros

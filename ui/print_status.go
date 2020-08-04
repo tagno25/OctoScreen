@@ -19,6 +19,8 @@ type printStatusPanel struct {
 	bed, tool0, tool1, tool2, tool3 *gtk.Button
 	file, time, timeLeft            *LabelWithImage
 	complete, pause, stop, menu     *gtk.Button
+
+	isPaused bool
 }
 
 func PrintStatusPanel(ui *UI) Panel {
@@ -149,12 +151,30 @@ func (m *printStatusPanel) createPauseButton() gtk.IWidget {
 	m.pause = MustButtonImageStyle("Pause", "pause.svg", "color1", func() {
 		defer m.updateTemperature()
 
-		Logger.Warning("Pausing/Resuming job")
-		cmd := &octoprint.PauseRequest{Action: octoprint.Toggle}
-		if err := cmd.Do(m.UI.Printer); err != nil {
-			Logger.Error(err)
-			return
+		Logger.Warning("Pausing job")
+		if m.UI.Settings != nil && m.UI.Settings.GCodes.Pause != "" {
+			cmd := &octoprint.CommandRequest{}
+			if m.isPaused {
+				cmd.Commands = []string{
+					m.UI.Settings.GCodes.Resume,
+				}
+			} else {
+				cmd.Commands = []string{
+					m.UI.Settings.GCodes.Pause,
+				}
+			}
+			if err := cmd.Do(m.UI.Printer); err != nil {
+				Logger.Error(err)
+				return
+			}
+		} else {
+			cmd := &octoprint.PauseRequest{Action: octoprint.Toggle}
+			if err := cmd.Do(m.UI.Printer); err != nil {
+				Logger.Error(err)
+				return
+			}
 		}
+		m.isPaused = !m.isPaused
 	})
 
 	return m.pause
@@ -162,7 +182,7 @@ func (m *printStatusPanel) createPauseButton() gtk.IWidget {
 
 func (m *printStatusPanel) createStopButton() gtk.IWidget {
 	m.stop = MustButtonImageStyle("Stop", "stop.svg", "color2",
-		ConfirmStopDialog(m.UI.w, "Are you sure you want to stop current print?", m),
+		m.confirmStopDialog(m.UI.w, "Are you sure you want to stop current print?", m),
 	)
 	return m.stop
 }
@@ -247,6 +267,17 @@ func (m *printStatusPanel) doUpdateState(s *octoprint.PrinterState) {
 	m.pause.SetImage(MustImageFromFile("pause.svg"))
 }
 
+func truncateString(str string, num int) string {
+	bnoden := str
+	if len(str) > num {
+		if num > 3 {
+			num -= 3
+		}
+		bnoden = str[0:num] + "..."
+	}
+	return bnoden
+}
+
 func (m *printStatusPanel) updateJob() {
 
 	s, err := (&octoprint.JobRequest{}).Do(m.UI.Printer)
@@ -259,7 +290,9 @@ func (m *printStatusPanel) updateJob() {
 	if s.Job.File.Name != "" {
 		file = s.Job.File.Name
 		file = strings.Replace(file, ".gcode", "", -1)
-		file = strEllipsisLen(file, 20)
+		//file = strEllipsisLen(file, 35)
+		file = truncateString(file, 20)
+		//strEllipsisLen does not appear to have a max length, allow overflow of screen box
 	}
 
 	m.file.Label.SetLabel(file)
@@ -305,7 +338,7 @@ func (m *printStatusPanel) defineToolsCount() int {
 	return profile.Extruder.Count
 }
 
-func ConfirmStopDialog(parent *gtk.Window, msg string, ma *printStatusPanel) func() {
+func (m *printStatusPanel) confirmStopDialog(parent *gtk.Window, msg string, ma *printStatusPanel) func() {
 	return func() {
 		win := gtk.MessageDialogNewWithMarkup(
 			parent,
@@ -331,9 +364,21 @@ func ConfirmStopDialog(parent *gtk.Window, msg string, ma *printStatusPanel) fun
 
 		if ergebnis == int(gtk.RESPONSE_YES) {
 			Logger.Warning("Stopping job")
-			if err := (&octoprint.CancelRequest{}).Do(ma.UI.Printer); err != nil {
-				Logger.Error(err)
-				return
+			if m.UI.Settings != nil && m.UI.Settings.GCodes.Stop != "" {
+				cmd := &octoprint.CommandRequest{}
+				cmd.Commands = []string{
+					m.UI.Settings.GCodes.Stop,
+				}
+				if err := cmd.Do(m.UI.Printer); err != nil {
+					Logger.Error(err)
+					return
+				}
+			} else {
+				cmd := &octoprint.CancelRequest{}
+				if err := cmd.Do(m.UI.Printer); err != nil {
+					Logger.Error(err)
+					return
+				}
 			}
 		}
 	}

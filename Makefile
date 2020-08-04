@@ -13,7 +13,7 @@ GOTEST = $(GOCMD) test -v
 # Environment
 WORKDIR := $(shell pwd)
 BUILD_PATH := $(WORKDIR)/build
-DOCKER_IMAGE_BUILD = mcuadros/octoprint-tft-build
+DOCKER_IMAGE_BUILD = boardthatpowder/octoprint-tft-build
 
 DEBIAN_PACKAGES = STRETCH
 STRETCH_NAME := stretch

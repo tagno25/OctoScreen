@@ -8,6 +8,7 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 )
 
+
 // MustWindow returns a new gtk.Window, if error panics.
 func MustWindow(t gtk.WindowType) *gtk.Window {
 	win, err := gtk.WindowNew(t)

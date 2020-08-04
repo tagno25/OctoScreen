@@ -5,6 +5,7 @@ screen=${1:-0}
 # wait 10s for the display manager service to start and attach to screen 
 sleep 10
 
-/usr/bin/xset -display :$screen s off          # deactivate screen saver
-/usr/bin/xset -display :$screen -dpms          # disable DPMS
-/usr/bin/xset -display :$screen s noblank      # disable screen blanking
+#/usr/bin/xset -display :$screen s off          # deactivate screen saver
+#/usr/bin/xset -display :$screen -dpms          # disable DPMS
+#/usr/bin/xset -display :$screen s noblank      # disable screen blanking
+/usr/bin/xset -display :$screen s 3600 3600	# 1 hour timeout
